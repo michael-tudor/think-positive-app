@@ -1,3 +1,10 @@
+# Screenshots of the app
+
+![Questions Screen](/Documents/Examples/questions_screen.png)
+![Add Answer Screen](/Documents/Examples/add_answer_screen.png)
+![History Screen](/Documents/Examples/history_screen.png)
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
