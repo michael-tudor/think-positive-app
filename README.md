@@ -1,8 +1,16 @@
 # Screenshots of the app
 
-![Questions Screen](/Documents/Examples/questions_screen.png)
-![Add Answer Screen](/Documents/Examples/add_answer_screen.png)
-![History Screen](/Documents/Examples/history_screen.png)
+<p float="left" style="margin-bottom: 30px;">
+  <img src="/Documents/Examples/questions_screen.png" width="24%" style="margin-right: 1%;" />
+  <img src="/Documents/Examples/add_answer_screen.png" width="24%" style="margin-right: 1%;" />
+  <img src="/Documents/Examples/history_screen_no_answers.png" width="24%" style="margin-right: 1%;" />
+</p>
+
+<p float="left">
+  <img src="/Documents/Examples/adding_answer_screen.png" width="24%" style="margin-right: 1%;" />
+  <img src="/Documents/Examples/answer_added_alert.png" width="24%" style="margin-right: 1%;" />
+  <img src="/Documents/Examples/history_screen.png" width="24%" style="margin-right: 1%;" />
+</p>
 
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
