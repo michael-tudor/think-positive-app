@@ -1,0 +1,32 @@
+% node -v
+% brew install node
+
+% watchman -v
+% brew install watchman
+
+% yarn -v
+% brew install yarn
+
+% npx react-native init MyNewProject
+
+Run instructions for Android:
+  • Have an Android emulator running (quickest way to get started), or a device connected.
+  • cd "/Users/master/think_positive_app" && npx react-native run-android
+
+Run instructions for iOS:
+  • cd "/Users/master/think_positive_app"
+  • cd ios && pod install && cd ..
+  • npx react-native run-ios
+  - or -
+  • Open think_positive_app/ios/think_positive_app.xcworkspace in Xcode or run "xed -b ios"
+  • Hit the Run button
+  
+Run instructions for macOS:
+  • See https://aka.ms/ReactNativeGuideMacOS for the latest up-to-date instructions.
+
+To change Ruby version:
+% ruby -v
+% eval "$(rbenv init -)"
+
+Sources:
+https://reactnavigation.org/docs/getting-started/
