@@ -15,8 +15,8 @@ import { styles } from './src/styles/styles';
 import IconPen from './assets/icons/pen.svg';
 import IconCalendar3 from './assets/icons/calendar3.svg';
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+var Stack = createNativeStackNavigator();
+var Tab = createBottomTabNavigator();
 
 function MainTabs() {
   return (

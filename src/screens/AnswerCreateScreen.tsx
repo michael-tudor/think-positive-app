@@ -4,15 +4,15 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import db from '../database/db';
 import { styles } from '../styles/styles';
 
-const AnswerCreateScreen = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const { questionId } = route.params;
-  const [question, setQuestion] = useState('');
-  const [purpose, setPurpose] = useState('');
-  const [advice, setAdvice] = useState('');
-  const [answer, setAnswer] = useState('');
-  const [error, setError] = useState('');
+var AnswerCreateScreen = () => {
+  var navigation = useNavigation();
+  var route = useRoute();
+  var { questionId } = route.params;
+  var [question, setQuestion] = useState('');
+  var [purpose, setPurpose] = useState('');
+  var [advice, setAdvice] = useState('');
+  var [answer, setAnswer] = useState('');
+  var [error, setError] = useState('');
 
   useEffect(() => {
     db.transaction((tx) => {
@@ -33,14 +33,13 @@ const AnswerCreateScreen = () => {
     });
   }, [questionId]);
 
-  const handleSubmit = () => {
+  var handleSubmit = () => {
     if (!answer.trim()) {
       setError('Answer field is required.');
       return;
     }
 
     setError('');
-    // TODO: Check if adding answer is working.
     db.transaction((tx) => {
       tx.executeSql(
         'INSERT INTO Answers (QuestionID, Answer) VALUES (?, ?)',

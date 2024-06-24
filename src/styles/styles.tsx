@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export var styles = StyleSheet.create({
   // Margin X1
   mt: { marginTop: 12 },
   mb: { marginBottom: 12 },
