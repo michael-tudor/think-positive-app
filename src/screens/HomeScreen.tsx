@@ -5,10 +5,10 @@ import db from '../database/db';
 // Styles and Design
 import { styles } from '../styles/styles';
 
-const HomeScreen = () => {
-  const [questions, setQuestions] = useState([]);
-  const navigation = useNavigation();
-  const isFocused = useIsFocused();
+var HomeScreen = () => {
+  var [questions, setQuestions] = useState([]);
+  var navigation = useNavigation();
+  var isFocused = useIsFocused();
 
   useEffect(() => {
     if (isFocused) { // If the screen is in focus, load questions
@@ -26,7 +26,7 @@ const HomeScreen = () => {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <Text style={[styles.mainHeader, styles.textCenter]}>
-          Welcome to <Text style={styles.primaryColor}>Think Positive App</Text>
+          Welcome to <Text style={styles.primaryColor}>Think Positive</Text> App
         </Text>
 
         <Text style={[styles.mainSubHeader, styles.textCenter]}>

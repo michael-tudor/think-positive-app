@@ -4,15 +4,15 @@ import { useNavigation } from '@react-navigation/native';
 import db from '../database/db';
 import { styles } from '../styles/styles';
 
-const QuestionCreateScreen = () => {
-  const [question, setQuestion] = useState('');
-  const [purpose, setPurpose] = useState('');
-  const [advice, setAdvice] = useState('');
-  const [error, setError] = useState('');
+var QuestionCreateScreen = () => {
+  var [question, setQuestion] = useState('');
+  var [purpose, setPurpose] = useState('');
+  var [advice, setAdvice] = useState('');
+  var [error, setError] = useState('');
 
-  const navigation = useNavigation();
+  var navigation = useNavigation();
 
-  const handleSubmit = () => {
+  var handleSubmit = () => {
     if (!question.trim()) {
       setError('Question field is required.');
       return;
@@ -47,6 +47,8 @@ const QuestionCreateScreen = () => {
   return (
     <ScrollView style={styles.safeArea}>
       <View style={styles.questionFormContainer}>
+        <Text style={styles.fontBold}>Question</Text>
+        <Text style={styles.textInfo}>Ask yourself a question that will help you think positively.</Text>
         <TextInput
           style={[styles.formTextArea, styles.p]}
           multiline={true}
@@ -55,6 +57,9 @@ const QuestionCreateScreen = () => {
           placeholder="Question"
         />
         {error ? <Text style={{color: 'red'}}>{error}</Text> : null}
+
+        <Text style={[styles.fontBold, styles.mt]}>Purpose</Text>
+        <Text style={styles.textInfo}>Write down why you are asking yourself this question. This will help you maintain motivation to answer it in the future.</Text>
         <TextInput
           style={[styles.formTextArea, styles.p]}
           multiline={true}
@@ -62,6 +67,9 @@ const QuestionCreateScreen = () => {
           onChangeText={setPurpose}
           placeholder="Purpose"
         />
+
+        <Text style={[styles.fontBold, styles.mt]}>Advice</Text>
+        <Text style={styles.textInfo}>Give yourself advice or an example of what your answer should be.</Text>
         <TextInput
           style={[styles.formTextArea, styles.p]}
           multiline={true}

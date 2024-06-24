@@ -6,10 +6,10 @@ import db from '../database/db';
 // Styles and Design
 import { styles } from '../styles/styles';
 
-const AnswersScreen = () => {
-  const [answers, setAnswers] = useState([]);
-  const navigation = useNavigation();
-  const isFocused = useIsFocused();
+var AnswersScreen = () => {
+  var [answers, setAnswers] = useState([]);
+  var navigation = useNavigation();
+  var isFocused = useIsFocused();
 
   useEffect(() => {
     if (isFocused) {
@@ -41,10 +41,10 @@ const AnswersScreen = () => {
               <Text style={[styles.textCenter]}>Answers will be displayed here</Text>
             ) : (
               answers.map((item) => {
-                const date = new Date(item.CreatedAt);
-                const month = format(date, 'MMM');
-                const day = format(date, 'dd');
-                const time = format(date, 'hh:mm a');
+                var date = new Date(item.CreatedAt);
+                var month = format(date, 'MMM');
+                var day = format(date, 'dd');
+                var time = format(date, 'hh:mm a');
 
                 return (
                   <TouchableOpacity
@@ -53,13 +53,11 @@ const AnswersScreen = () => {
                     onPress={() => navigation.navigate('Edit Answer', { answerId: item.ID })}
                   >
                     <View style={{ flexDirection: 'row' }}>
-                      <View style={styles.pr}>
+                      <View style={[styles.pr, styles.mb]}>
                         <View style={styles.answerMonthDay}>
                           <Text style={styles.answerDayText}>{day}</Text>
                           <Text style={styles.answerMonthText}>{month}</Text>
                         </View>
-
-                        <Text style={[styles.answerTime, styles.textInfo]}>{time}</Text>
                       </View>
 
                       <Text style={styles.answerQuestion}>{item.Question}</Text>

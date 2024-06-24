@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
   },
 
   mainSubHeader: {
-    paddingTop: 18,
+    paddingTop: 6,
     paddingBottom: 6,
     paddingLeft: 24,
     paddingRight: 24,
@@ -144,7 +144,7 @@ export const styles = StyleSheet.create({
 
   formTextArea: {
     width: '100%',
-    height: 160,
+    height: 100,
     marginTop: 12,
     marginBottom: 12,
     borderColor: 'gray',
@@ -187,11 +187,6 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '300',
     letterSpacing: 0.5,
-  },
-
-  answerTime: {
-    paddingTop: 6,
-    textAlign: 'center',
   },
 
   answerQuestion: {
