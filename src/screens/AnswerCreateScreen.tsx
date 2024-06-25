@@ -71,6 +71,7 @@ var AnswerCreateScreen = () => {
         <DeleteButton
           recordId={questionId}
           tableName="Questions"
+          checkDependencies={true}
         />
       ),
     });

@@ -6,7 +6,7 @@ var db = SQLite.openDatabase(
     location: 'default',
   },
   () => {
-    console.log('Database opened');
+    // console.log('Database opened');
   },
   error => {
     console.log(error);

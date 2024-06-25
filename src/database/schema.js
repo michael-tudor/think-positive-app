@@ -13,7 +13,7 @@ var createQuestionsTable = () => {
       );`,
       [],
       () => {
-        console.log('Table Questions created successfully.');
+        // console.log('Table Questions created successfully.');
       },
       error => {
         console.log('Error creating Questions table: ', error);
@@ -34,7 +34,7 @@ var createAnswersTable = () => {
       );`,
       [],
       () => {
-        console.log('Table Answers created successfully.');
+        // console.log('Table Answers created successfully.');
       },
       error => {
         console.log('Error creating Answers table: ', error);
