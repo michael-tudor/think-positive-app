@@ -53,7 +53,7 @@ var AnswersScreen = () => {
                 return (
                   <TouchableOpacity
                     key={item.ID}
-                    style={styles.parrentBoxOfQuestion}
+                    style={styles.answerItemBox}
                     onPress={() => navigation.navigate('Edit Answer', { answerId: item.ID })}
                   >
                     <View style={{ flexDirection: 'row' }}>

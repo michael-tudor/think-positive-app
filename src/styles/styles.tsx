@@ -106,9 +106,10 @@ export var styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
 
-  parrentBoxOfQuestion: {
+  questionDefaultItemBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#fff',
-    padding: 16,
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 24,
@@ -121,12 +122,31 @@ export var styles = StyleSheet.create({
     elevation: 10, // Shadow effect on Android
   },
 
-  questionTitle: {
+  questionDoneItem: {
+    backgroundColor: '#705bdd',
+  },
+
+  questionDefaultTitle: {
+    flex: 1,
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 16,
     color: '#333',
     fontSize: 16,
     lineHeight: 24,
     fontWeight: 'bold',
     letterSpacing: 0.4,
+  },
+
+  questionDoneTitle: {
+    color: '#fff',
+  },
+
+  questionDefaultIcon: {
+    margin: 16,
+    width: 24,
+    height: 24,
+    color: '#c3c3c3',
   },
 
   // Forms
@@ -160,6 +180,21 @@ export var styles = StyleSheet.create({
   },
 
   // Answers Screen
+  answerItemBox: {
+    backgroundColor: '#fff',
+    padding: 16,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 24,
+    marginRight: 24,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10, // Shadow effect on iOS
+    elevation: 10, // Shadow effect on Android
+  },
+
   answerMonthDay: {
     backgroundColor: '#705bdd',
     width: 64,

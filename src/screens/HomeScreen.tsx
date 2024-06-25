@@ -4,6 +4,8 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import db from '../database/connect';
 // Styles and Design
 import { styles } from '../styles/styles';
+import IconPlusLg from '../../assets/icons/plus-lg.svg';
+import IconCheck2Circle from '../../assets/icons/check2-circle.svg';
 
 var HomeScreen = () => {
   var [questions, setQuestions] = useState([]);
@@ -13,9 +15,16 @@ var HomeScreen = () => {
   useEffect(() => {
     if (isFocused) { // If the screen is in focus, load questions
       db.transaction((tx) => {
-        tx.executeSql(
-          'SELECT * FROM Questions', [], (_, { rows }
-        ) => {
+        tx.executeSql(`
+          SELECT Questions.*,
+            CASE
+              WHEN DATE(Answers.CreatedAt) = DATE('now') THEN true
+              ELSE false
+            END as AnsweredToday
+          FROM Questions
+          LEFT JOIN Answers ON Questions.ID = Answers.QuestionId
+          AND DATE(Answers.CreatedAt) = DATE('now');
+        `, [], (_, { rows }) => {
           setQuestions(rows.raw());
         });
       });
@@ -35,15 +44,36 @@ var HomeScreen = () => {
         </Text>
 
         <View>
-          {questions.map((item) => (
-            <TouchableOpacity
-              key={item.ID}
-              style={styles.parrentBoxOfQuestion}
-              onPress={() => navigation.navigate('New Answer', { questionId: item.ID })}
-            >
-              <Text style={styles.questionTitle}>{item.Question}</Text>
-            </TouchableOpacity>
-          ))}
+          {questions.map(
+            (item) => item.AnsweredToday ? (
+              <TouchableOpacity
+                key={item.ID}
+                style={[styles.questionDefaultItemBox, styles.questionDoneItem]}
+                onPress={() => navigation.navigate('New Answer', { questionId: item.ID })}
+              >
+                <Text style={[styles.questionDefaultTitle, styles.questionDoneTitle]}>{item.Question}</Text>
+                <IconCheck2Circle
+                  width={styles.questionDefaultIcon.width}
+                  height={styles.questionDefaultIcon.height}
+                  style={styles.questionDefaultIcon}
+                  fill={styles.questionDoneTitle.color}
+                />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                key={item.ID}
+                style={styles.questionDefaultItemBox}
+                onPress={() => navigation.navigate('New Answer', { questionId: item.ID })}
+              >
+                <Text style={styles.questionDefaultTitle}>{item.Question}</Text>
+                <IconPlusLg
+                  width={styles.questionDefaultIcon.width}
+                  height={styles.questionDefaultIcon.height}
+                  style={styles.questionDefaultIcon}
+                />
+              </TouchableOpacity>
+            )
+          )}
         </View>
 
         <View style={styles.mbX2}>
