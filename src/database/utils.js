@@ -1,35 +1,65 @@
 import db from './connect';
 
-// TODO: Check updating record is working.
-// Example: updateRecord('Questions', { Question: 'New question text' }, 1);
-// var updateRecord = (tableName, newData, id) => {
-//   // Create a query string with placeholders for each field in newData
-//   var fieldsToUpdate = Object.keys(newData).map(field => `${field} = ?`).join(', ');
+/**
+ * Finds a record by ID from the specified table.
+ * @param {string} tableName The name of the table to query.
+ * @param {number} id The ID of the record to find.
+ * @returns {Promise<Object|null>} A promise that resolves with the found record or null if not found.
+*/
+var findRecordById = (tableName, recordId) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT * FROM ${tableName} WHERE ID = ?`,
+        [recordId],
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            resolve(rows.item(0));
+          } else {
+            resolve(null);
+          }
+        },
+        (_, error) => reject(error)
+      );
+    });
+  });
+}
 
-//   db.transaction((tx) => {
-//     tx.executeSql(
-//       `UPDATE ${tableName} SET ${fieldsToUpdate},
-//        UpdatedAt = CURRENT_TIMESTAMP WHERE ID = ?`,
-//       [...Object.values(newData), id],
-//       (_, { rowsAffected }) => {
-//         if (rowsAffected > 0) {
-//           console.log('Record updated successfully.');
-//         } else {
-//           console.log('Error updating record.');
-//         }
-//       },
-//       (_, error) => {
-//         console.log('Error updating record: ', error);
-//       },
-//     );
-//   });
-// };
+/**
+ * Updates a record in the specified table with the provided data.
+ * @param {string} tableName The name of the table to update.
+ * @param {Object} data An object containing the fields to update and their new values.
+ * @param {number} recordId The ID of the record to update.
+ * @returns {Promise<number>} A promise that resolves with the number of rows affected.
+*/
+var updateRecord = (tableName, data, recordId) => {
+  return new Promise((resolve, reject) => {
+    // Create a query string with placeholders for each field in data
+    var fieldsToUpdate = Object.keys(data).map(field => `${field} = ?`).join(', ');
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        `UPDATE ${tableName} SET ${fieldsToUpdate},
+        UpdatedAt = CURRENT_TIMESTAMP WHERE ID = ?`,
+        [...Object.values(data), recordId],
+        (_, { rowsAffected }) => {
+          if (rowsAffected > 0) {
+            resolve(rowsAffected);
+          } else {
+            reject(`Error updating record in ${tableName}.`)
+          }
+        },
+        (_, error) => reject(error)
+      );
+    });
+  });
+};
 
 /**
  * Deletes a record from the specified table by ID.
  * @param {string} tableName The name of the table from which the record will be deleted.
  * @param {number} id The ID of the record to delete.
- */
+*/
 var deleteRecordById = (tableName, id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -54,7 +84,7 @@ var deleteRecordById = (tableName, id) => {
  * @param {string} tableName The name of the table from which the record might be deleted.
  * @param {number} recordId The ID of the record to check for dependencies.
  * @returns {Promise<boolean>} A promise that resolves with `true` if dependencies are found.
- */
+*/
 var checkDependenciesById = (tableName, recordId) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -108,4 +138,10 @@ var checkDependenciesById = (tableName, recordId) => {
   });
 };
 
-export { db, deleteRecordById, checkDependenciesById };
+export {
+  db,
+  findRecordById,
+  updateRecord,
+  deleteRecordById,
+  checkDependenciesById
+};

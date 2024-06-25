@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Screens
 import HomeScreen from './src/screens/HomeScreen';
 import QuestionCreateScreen from './src/screens/QuestionCreateScreen';
+import QuestionUpdateScreen from './src/screens/QuestionUpdateScreen';
 import AnswerCreateScreen from './src/screens/AnswerCreateScreen';
 import AnswersScreen from './src/screens/AnswersScreen';
 import AnswerUpdateScreen from './src/screens/AnswerUpdateScreen';
@@ -75,12 +76,17 @@ function App(): React.JSX.Element {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Create Question"
+          name="New Question"
           component={QuestionCreateScreen}
           options={{ headerBackTitle: 'Questions' }}
         />
         <Stack.Screen
-          name="Add Answer"
+          name="Edit Question"
+          component={QuestionUpdateScreen}
+          options={{ headerBackTitle: 'New Answer' }}
+        />
+        <Stack.Screen
+          name="New Answer"
           component={AnswerCreateScreen}
           options={{ headerBackTitle: 'Questions' }}
         />

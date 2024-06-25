@@ -56,7 +56,7 @@ var AnswerUpdateScreen = () => {
           if (rowsAffected > 0) {
             Alert.alert(
               'Success',
-              'Answer added successfully.',
+              'Answer updated successfully.',
               [{ text: 'OK', onPress: () => navigation.goBack() }]
             );
           } else {

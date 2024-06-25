@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useCallback } from 'react';
 import { ScrollView, View, Text, TextInput, Button, Alert } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import db from '../database/connect';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
+import { db, findRecordById } from '../database/utils';
 import DeleteButton from '../components/DeleteButton';
 // Styles and Design
 import { styles } from '../styles/styles';
@@ -16,24 +16,21 @@ var AnswerCreateScreen = () => {
   var [answer, setAnswer] = useState('');
   var [error, setError] = useState('');
 
-  useEffect(() => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        'SELECT * FROM Questions WHERE id = ?',
-        [questionId],
-        (_, { rows }) => {
-          if (rows.length > 0) {
-            setQuestion(rows.item(0).Question);
-            setPurpose(rows.item(0).Purpose);
-            setAdvice(rows.item(0).Advice);
-          }
-        },
-        (_, error) => {
-          console.log('Error fetching question: ', error);
-        },
-      );
+  var fetchQuestionDetails = useCallback(() => {
+    findRecordById('Questions', questionId).then((record) => {
+      if (record) {
+        setQuestion(record.Question);
+        setPurpose(record.Purpose);
+        setAdvice(record.Advice);
+      }
     });
   }, [questionId]);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchQuestionDetails();
+    }, [fetchQuestionDetails])
+  );
 
   var handleSubmit = () => {
     if (!answer.trim()) {
@@ -46,7 +43,7 @@ var AnswerCreateScreen = () => {
       tx.executeSql(
         'INSERT INTO Answers (QuestionID, Answer) VALUES (?, ?)',
         [questionId, answer],
-        (_, { rowsAffected }) => {
+        (_: any, { rowsAffected }: any) => {
           if (rowsAffected > 0) {
             Alert.alert(
               'Success',
@@ -58,7 +55,7 @@ var AnswerCreateScreen = () => {
             console.log('Answer could not be added.');
           }
         },
-        (_, error) => {
+        (_: any, error: any) => {
           console.log('Error adding answer: ', error);
         },
       );
@@ -93,8 +90,14 @@ var AnswerCreateScreen = () => {
           />
           <Text style={styles.textInfo}>{advice}</Text>
           {error ? <Text style={{color: 'red'}}>{error}</Text> : null}
-          <View style={styles.mt}>
+          <View style={styles.my}>
             <Button title="Create Answer" onPress={handleSubmit} />
+          </View>
+          <View style={styles.my}>
+            <Button
+              title="Edit Question"
+              onPress={() => navigation.navigate('Edit Question', { questionId: questionId })}
+            />
           </View>
         </View>
       </View>

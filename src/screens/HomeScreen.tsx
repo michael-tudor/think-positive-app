@@ -39,7 +39,7 @@ var HomeScreen = () => {
             <TouchableOpacity
               key={item.ID}
               style={styles.parrentBoxOfQuestion}
-              onPress={() => navigation.navigate('Add Answer', { questionId: item.ID })}
+              onPress={() => navigation.navigate('New Answer', { questionId: item.ID })}
             >
               <Text style={styles.questionTitle}>{item.Question}</Text>
             </TouchableOpacity>
@@ -48,8 +48,8 @@ var HomeScreen = () => {
 
         <View style={styles.mbX2}>
           <Button
-            title="Create New Question"
-            onPress={() => navigation.navigate('Create Question')}
+            title="Create Question"
+            onPress={() => navigation.navigate('New Question')}
           />
         </View>
       </ScrollView>
