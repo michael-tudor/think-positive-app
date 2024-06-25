@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, Button, TouchableOpacity } from 'react-native';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
-import db from '../database/db';
+import db from '../database/connect';
 // Styles and Design
 import { styles } from '../styles/styles';
 

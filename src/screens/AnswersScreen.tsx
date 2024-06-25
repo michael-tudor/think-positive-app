@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { format } from 'date-fns';
-import db from '../database/db';
+import db from '../database/connect';
 // Styles and Design
 import { styles } from '../styles/styles';
 
 var AnswersScreen = () => {
-  var [answers, setAnswers] = useState([]);
+  var [answers, setAnswers] = useState<{
+    ID: number,
+    CreatedAt: string,
+    Question: string,
+    Answer: string
+  }[]>([]);
   var navigation = useNavigation();
   var isFocused = useIsFocused();
 
@@ -44,7 +49,6 @@ var AnswersScreen = () => {
                 var date = new Date(item.CreatedAt);
                 var month = format(date, 'MMM');
                 var day = format(date, 'dd');
-                var time = format(date, 'hh:mm a');
 
                 return (
                   <TouchableOpacity

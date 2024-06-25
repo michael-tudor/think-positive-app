@@ -204,4 +204,20 @@ export var styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 22,
   },
+
+  deleteButton: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  deleteButtonText: {
+    paddingLeft: 6,
+    fontSize: 16,
+    color: 'red',
+  },
+
+  deleteButtonIcon: {
+    width: 24,
+    height: 24,
+  },
 });

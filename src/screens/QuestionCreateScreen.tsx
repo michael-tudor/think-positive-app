@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, TextInput, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import db from '../database/db';
+import db from '../database/connect';
 import { styles } from '../styles/styles';
 
 var QuestionCreateScreen = () => {

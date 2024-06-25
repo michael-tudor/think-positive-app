@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { ScrollView, View, Text, TextInput, Button, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import db from '../database/db';
+import db from '../database/connect';
+import DeleteButton from '../components/DeleteButton';
 // Styles and Design
 import { styles } from '../styles/styles';
 
 var AnswerUpdateScreen = () => {
   var navigation = useNavigation();
   var route = useRoute();
-  var { answerId } = route.params;
+  var { answerId } = route.params as { answerId: string };
   var [question, setQuestion] = useState('');
   var [purpose, setPurpose] = useState('');
   var [advice, setAdvice] = useState('');
@@ -68,6 +69,17 @@ var AnswerUpdateScreen = () => {
       );
     });
   };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <DeleteButton
+          recordId={answerId}
+          tableName="Answers"
+        />
+      ),
+    });
+  }, [navigation]);
 
   return (
     <ScrollView>
